@@ -13,15 +13,17 @@ namespace uge2Heaps
         private int last;
         public GoodHeap()
         {
-            max = 20;
+            max = 10;
             elements = new int[max];
             last = -1;
         }
 
         public int getTop()
-        {
+        {   
             swap(0, last);
             last--;
+            if (! isEmpty() )
+                heapifyDown(0);
             return elements[last + 1];
         }
 
@@ -31,7 +33,7 @@ namespace uge2Heaps
             if (last == max)
                 expand();
             elements[last] = element;
-            heapify(last);
+            heapifyUp(last);
         }
 
         private void expand()
@@ -53,7 +55,18 @@ namespace uge2Heaps
             return last + 1;
         }
 
-        private void heapify(int i) // heapify node elements[i] in the tree elements[0..last]
+        private void heapifyUp(int i) // 
+        {
+            if (i == 0) return;
+            int j = i / 2;
+            if (elements[i] > elements[j])
+            {
+                swap(i, j);
+                heapifyUp(j);
+            }
+        }
+
+        private void heapifyDown(int i) // insert element
         {
             int j = 2 * i + 1;
             if (j <= last)
@@ -63,12 +76,10 @@ namespace uge2Heaps
                 if (elements[i] < elements[j])
                 {
                     swap(i, j);
-                    heapify(j);
+                    heapifyDown(j);
                 }
             }
         }
-
-
         private void swap(int s, int t)
         {
             int tmp = elements[s];
