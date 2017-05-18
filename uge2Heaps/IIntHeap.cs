@@ -12,5 +12,6 @@ namespace uge2Heaps
         int size();
         void insert(int element);
         int getTop(); // return and remove top element from heap
+        int getTopOr(int v);
     }
 }

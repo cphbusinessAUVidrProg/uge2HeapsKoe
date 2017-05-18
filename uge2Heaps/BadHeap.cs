@@ -24,6 +24,11 @@ namespace uge2Heaps
             return ret;
         }
 
+        public int getTopOr(int v)
+        {
+            throw new NotImplementedException();
+        }
+
         public void insert(int element)
         {
             elements.Add(element);
